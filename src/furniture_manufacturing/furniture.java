@@ -7,5 +7,11 @@
 package furniture_manufacturing;
 
 public class furniture {
+    int furnitureID;
 
+    public furniture(int id) {
+        
+        this.furnitureID = id;
+
+    }
 }

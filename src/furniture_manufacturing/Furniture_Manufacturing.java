@@ -6,6 +6,10 @@
 package furniture_manufacturing;
 
 public class Furniture_Manufacturing {
+    
+    /**
+     * Warehouse
+     **/
     public static final int STOCK_NAIL = 100;
     public static final int STOCK_WOOD = 100;
     public static final int STOCK_STEEL = 100;
@@ -13,13 +17,11 @@ public class Furniture_Manufacturing {
 
     public static void main(String[] args) {
         int currentStock = 0;
+        int productionNum = 10;
 
-        /**
-         * 1. Check furniture type,
-         *   
-         */
-    
-    
+
+        furniture[] furnitures = generateFurniture(productionNum); 
+        
     }
 
 }
