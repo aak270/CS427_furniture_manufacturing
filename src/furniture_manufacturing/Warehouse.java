@@ -62,4 +62,16 @@ public class Warehouse {
             return -1;  //Not enough mat
         }
     }
+
+    public void addWoods(int wood) {
+        this.wood += wood;
+    }
+
+    public void addSteels(int steel) {
+        this.steel += steel;
+    }
+
+    public void addNails(int nail) {
+        this.nail += nail;
+    }
 }

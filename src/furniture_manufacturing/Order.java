@@ -6,10 +6,14 @@
 
 package furniture_manufacturing;
 
-public class Furniture {
-    int type; //1: chair 2: table
-    
-    public Furniture(int type) {
-        this.type = type;
+public class Order {
+    int id;
+    int time;
+    Furniture[] furnitures;
+
+    public Order(int id, int time, Furniture[] furnitures) {
+        this.id = id;
+        this.time = time;
+        this.furnitures = furnitures;
     }
 }
