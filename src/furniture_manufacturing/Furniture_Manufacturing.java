@@ -5,6 +5,9 @@
  */
 package furniture_manufacturing;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Furniture_Manufacturing {
 
     /**
@@ -33,33 +36,60 @@ public class Furniture_Manufacturing {
 
     public static void main(String[] args) {
         myOrders = generateOrder(numOfOrder);
+        myWarehouse = new Warehouse(STOCK_WOOD, STOCK_STEEL, STOCK_NAIL);
 
+        int order_index = 0;
+        Timer timer = new Timer();
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                addResources();
+            }
+        }, 0, 10000); // add resources every 10 seconds
+
+        while (order_index <= myOrders.length - 1) {
+            Order curr_order = myOrders[order_index];
+            if (checkResources(curr_order.furnitures)) {
+                buildFurniture(curr_order.furnitures[0].type);
+                order_index++;
+            } else {
+                try {
+                    Thread.sleep(2000); // pause for 10 seconds
+                    System.out.println("check again");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        timer.cancel();
+        System.out.println("Simulation Ends");
         /**
          * Make a furniture type random 1, 0; 1 is chair 0 is table
          *
          */
 
-        myWarehouse = new Warehouse(STOCK_WOOD, STOCK_STEEL, STOCK_NAIL);
-
-        for (Order order : myOrders) {
-            if (checkResources(order.furnitures)) {
-                /**
-                 * Wait 10 min
-                 */
-                for (Furniture furniture : order.furnitures) {
-                    buildFurniture(furniture.type);
-                }
-                System.out.printf("Order %d Success with %d furniture(s)\n", order.id + 1, order.furnitures.length);
-            } else {
-                addResources();
-                for (Furniture furniture : order.furnitures) {
-                    buildFurniture(furniture.type);
-                }
-                System.out.printf("Order %d Success with %d furniture(s)\n", order.id + 1, order.furnitures.length);
-
-            }
-        }
-        System.out.println("Total Runtime: " + simulation_runtime);
+        // for (Order order : myOrders) {
+        // if (checkResources(order.furnitures)) {
+        // /**
+        // * Wait 10 min
+        // */
+        // for (Furniture furniture : order.furnitures) {
+        // buildFurniture(furniture.type);
+        // }
+        // System.out.printf("Order %d Success with %d furniture(s)\n", order.id + 1,
+        // order.furnitures.length);
+        // } else {
+        // addResources();
+        // for (Furniture furniture : order.furnitures) {
+        // buildFurniture(furniture.type);
+        // }
+        // System.out.printf("Order %d Success with %d furniture(s)\n", order.id + 1,
+        // order.furnitures.length);
+        // }
+        // }
+        // System.out.println("Total Runtime: " + simulation_runtime);
     }
 
     /**
@@ -75,9 +105,7 @@ public class Furniture_Manufacturing {
             int id = i;
             int time = (int) (Math.random() * intervalOrderTime[1] + intervalOrderTime[0]);
             Furniture[] furnitures = generateFurnitures(1);
-            orders[i] = new Order(id, time, furnitures);/**
-                                                         * 
-                                                         */
+            orders[i] = new Order(id, time, furnitures);
         }
         return orders;
     }
@@ -92,7 +120,7 @@ public class Furniture_Manufacturing {
     }
 
     public static void buildFurniture(int type) {
-
+        System.out.println("building " + type);
         int currWood = 0;
         int currSteel = 0;
         int currNail = 0;
@@ -115,6 +143,7 @@ public class Furniture_Manufacturing {
         }
 
         simulation_runtime += processTime;
+        System.out.println(type + "is built");
     }
 
     public static boolean checkResources(Furniture[] furnitures) {
@@ -139,15 +168,15 @@ public class Furniture_Manufacturing {
         }
         if (requireWood > myWarehouse.getWood()) {
             isEnough = false;
-            System.out.println("\nError: Not Enough Wood");
+            System.out.println("Error: Not Enough Wood");
         }
         if (requireSteel > myWarehouse.getSteel()) {
             isEnough = false;
-            System.out.println("\nError: Not Enough Steel");
+            System.out.println("Error: Not Enough Steel");
         }
         if (requireNail > myWarehouse.getNail()) {
             isEnough = false;
-            System.out.println("\nError: Not Enough Nail");
+            System.out.println("Error: Not Enough Nail");
         }
         return isEnough;
     }
