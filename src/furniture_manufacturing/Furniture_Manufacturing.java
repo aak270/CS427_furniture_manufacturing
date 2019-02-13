@@ -5,8 +5,6 @@
  */
 package furniture_manufacturing;
 
-import java.util.Random;
-
 public class Furniture_Manufacturing {
 
     /**
@@ -52,6 +50,11 @@ public class Furniture_Manufacturing {
                 System.out.printf("Order %d Success with %d furniture(s)\n", order.id + 1, order.furnitures.length);
             } else {
                 addResources();
+                for (Furniture furniture : order.furnitures) {
+                    buildFurniture(furniture.type);
+                }
+                System.out.printf("Order %d Success with %d furniture(s)\n", order.id + 1, order.furnitures.length);
+                
             }
         }
         System.out.println("Total Runtime: " + simulation_runtime);
@@ -111,13 +114,6 @@ public class Furniture_Manufacturing {
         }
 
         simulation_runtime += processTime;
-        /*
-         * if (currWood == -1 || currSteel == -1 || currNail == -1) { if (currWood ==
-         * -1) { System.out.println("Not Enough Wood"); } if (currSteel == -1) {
-         * System.out.println("Not Enough Steel"); } if (currNail == -1) {
-         * System.out.println("Not Enough Nail"); } return false; } else {
-         * simulation_runtime += processTime; return true; }
-         */
     }
 
     public static boolean checkResources(Furniture[] furnitures) {
@@ -142,25 +138,24 @@ public class Furniture_Manufacturing {
         }
         if (requireWood > myWarehouse.getWood()) {
             isEnough = false;
-            System.out.println("Not Enough Wood");
+            System.out.println("\nError: Not Enough Wood");
         }
         if (requireSteel > myWarehouse.getSteel()) {
             isEnough = false;
-            System.out.println("Not Enough Steel");
+            System.out.println("\nError: Not Enough Steel");
         }
         if (requireNail > myWarehouse.getNail()) {
             isEnough = false;
-            System.out.println("Not Enough Nail");
+            System.out.println("\nError: Not Enough Nail");
         }
         return isEnough;
     }
 
-    public static void addResources(){
+    public static void addResources() {
         double percentageFrom = 0.4;
         double percentageTo = 0.6;
 
-
-        int randWood = rand(STOCK_WOOD * percentageFrom, STOCK_WOOD * percentageTo); 
+        int randWood = rand(STOCK_WOOD * percentageFrom, STOCK_WOOD * percentageTo);
         int randSteel = rand(STOCK_STEEL * percentageFrom, STOCK_STEEL * percentageTo);
         int randNail = rand(STOCK_NAIL * percentageFrom, STOCK_NAIL * percentageTo);
 
@@ -172,17 +167,9 @@ public class Furniture_Manufacturing {
     }
 
     public static int rand(double from, double to) {
-        return (int)(Math.random() * to + from);
+        return (int) (Math.random() * to + from);
     }
-
-
 }
-
-
-
-
-
-
 
 /**
  * 
