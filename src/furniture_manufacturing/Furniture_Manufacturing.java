@@ -19,6 +19,8 @@ public class Furniture_Manufacturing {
     public static Order[] myOrders;
     public static Warehouse myWarehouse;
 
+    public static Inventory myInventory = new Inventory(0, 0);
+
     /**
      * index [0: wood , 1: steel, 2: nail]
      */
@@ -54,7 +56,7 @@ public class Furniture_Manufacturing {
                     buildFurniture(furniture.type);
                 }
                 System.out.printf("Order %d Success with %d furniture(s)\n", order.id + 1, order.furnitures.length);
-                
+
             }
         }
         System.out.println("Total Runtime: " + simulation_runtime);
@@ -73,10 +75,9 @@ public class Furniture_Manufacturing {
             int id = i;
             int time = (int) (Math.random() * intervalOrderTime[1] + intervalOrderTime[0]);
             Furniture[] furnitures = generateFurnitures(1);
-            orders[i] = new Order(id, time, furnitures);
-            /**
-             * 
-             */
+            orders[i] = new Order(id, time, furnitures);/**
+                                                         * 
+                                                         */
         }
         return orders;
     }

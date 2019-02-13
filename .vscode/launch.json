@@ -4,6 +4,12 @@
             "type": "java",
             "name": "CodeLens (Launch) - Furniture_Manufacturing",
             "request": "launch",
+            "mainClass": "furniture_manufacturing.Furniture_Manufacturing"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Furniture_Manufacturing",
+            "request": "launch",
             "mainClass": "furniture_manufacturing.Furniture_Manufacturing",
             "projectName": "Furniture_Manufacturing_f9dd1890"
         }

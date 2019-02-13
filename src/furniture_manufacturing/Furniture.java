@@ -7,8 +7,8 @@
 package furniture_manufacturing;
 
 public class Furniture {
-    int type; //1: chair 2: table
-    
+    int type; // 1: chair 2: table
+
     public Furniture(int type) {
         this.type = type;
     }
