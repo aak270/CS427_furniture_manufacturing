@@ -10,6 +10,10 @@ import java.util.TimerTask;
 
 public class Furniture_Manufacturing {
 
+    // constants
+    private final int CHAIR = 1;
+    private final int TABLE = 2;
+
     /**
      * Warehouse
      *
@@ -22,7 +26,7 @@ public class Furniture_Manufacturing {
     public static Order[] myOrders;
     public static Warehouse myWarehouse;
 
-    public static Inventory myInventory = new Inventory(0, 0);
+    public static Inventory myInventory;
 
     /**
      * index [0: wood , 1: steel, 2: nail]
@@ -37,6 +41,7 @@ public class Furniture_Manufacturing {
     public static void main(String[] args) {
         myOrders = generateOrder(numOfOrder);
         myWarehouse = new Warehouse(STOCK_WOOD, STOCK_STEEL, STOCK_NAIL);
+        myInventory = new Inventory(0, 0);
 
         int order_index = 0;
         Timer timer = new Timer();
@@ -52,6 +57,7 @@ public class Furniture_Manufacturing {
             Order curr_order = myOrders[order_index];
             if (checkResources(curr_order.furnitures)) {
                 buildFurniture(curr_order.furnitures[0].type);
+                myInventory.store(curr_order.furnitures[0].type, 1);
                 order_index++;
             } else {
                 try {
@@ -65,6 +71,8 @@ public class Furniture_Manufacturing {
 
         timer.cancel();
         System.out.println("Simulation Ends");
+        System.out.println("nChairs: " + myInventory.numChair);
+        System.out.println("nTables: " + myInventory.numTable);
         /**
          * Make a furniture type random 1, 0; 1 is chair 0 is table
          *
@@ -143,7 +151,8 @@ public class Furniture_Manufacturing {
         }
 
         simulation_runtime += processTime;
-        System.out.println(type + "is built");
+
+        System.out.println(type + " is built");
     }
 
     public static boolean checkResources(Furniture[] furnitures) {

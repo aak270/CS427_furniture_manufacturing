@@ -15,6 +15,14 @@ public class Inventory {
         this.numTable = numTable;
     }
 
+    public void store(int type, int num) {
+        if (type == 1) {
+            this.addChair(num);
+        } else if (type == 2) {
+            this.addTable(num);
+        }
+    }
+
     public void addChair(int nChair) {
         this.numChair += nChair;
     }
