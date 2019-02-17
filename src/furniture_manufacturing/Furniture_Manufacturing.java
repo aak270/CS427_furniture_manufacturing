@@ -70,6 +70,41 @@ public class Furniture_Manufacturing {
         }
 
         timer.cancel();
+        
+        /**
+         * Simulation for animation, adding resources when every 10 simulation time
+         * i : simulation time
+         * o : order index
+         */
+/*        Animation animation = new Animation();
+        animation.setResource(myWarehouse.getWood(), myWarehouse.getSteel(), myWarehouse.getNail());
+        for(int i = 0, o = 0; o < myOrders.length; i++){
+            // draw top 10 order
+            int max = (myOrders.length - o < 10) ? myOrders.length - o : 10 ;
+            int[] types = new int[max];
+            for(int j = 0; j < max; j++){
+                types[j] = myOrders[o+j].furnitures[0].type;
+            }
+            animation.drawOrder(types);
+            
+            Order curr_order = myOrders[o];
+            if (checkResources(curr_order.furnitures)) {
+                buildFurniture(curr_order.furnitures[0].type);
+                myInventory.store(curr_order.furnitures[0].type, 1);
+                o++;
+                
+                // animation functions
+                animation.drawBuild(curr_order.furnitures[0].type, myWarehouse.getWood(), myWarehouse.getSteel(), myWarehouse.getNail()); // draw current manucfatured item
+                animation.setInventory(myInventory.numChair, myInventory.numTable); // set the inventory animation
+            }
+            
+            // add resources very 10 simulation time
+            if(i != 0 && i % 10 == 0){
+                addResources();
+                animation.setResource(myWarehouse.getWood(), myWarehouse.getSteel(), myWarehouse.getNail());
+            }
+        }
+*/
         System.out.println("Simulation Ends");
         System.out.println("nChairs: " + myInventory.numChair);
         System.out.println("nTables: " + myInventory.numTable);
