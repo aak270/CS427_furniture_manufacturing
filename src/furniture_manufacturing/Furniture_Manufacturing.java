@@ -41,7 +41,7 @@ public class Furniture_Manufacturing {
     public static int[] intervalOrderTime = { 0, 10 };
     public static int numOfOrder = 50;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         myOrders = generateOrder(numOfOrder);
         myWarehouse = new Warehouse(STOCK_WOOD, STOCK_STEEL, STOCK_NAIL);
         myInventory = new Inventory(0, 0);
