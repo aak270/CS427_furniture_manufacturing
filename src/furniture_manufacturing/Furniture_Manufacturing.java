@@ -10,6 +10,8 @@ import java.util.TimerTask;
 
 public class Furniture_Manufacturing {
 
+    public static boolean isRun = false;
+    
     // constants
     private final int CHAIR = 1;
     private final int TABLE = 2;
@@ -33,6 +35,7 @@ public class Furniture_Manufacturing {
      */
     public static int[] chairMaterials = { 3, 5, 10 };
     public static int[] tableMaterials = { 5, 3, 15 };
+    public static int[] itemDuration = {3, 5};
 
     public static int simulation_runtime = 0;
     public static int[] intervalOrderTime = { 0, 10 };
@@ -43,7 +46,7 @@ public class Furniture_Manufacturing {
         myWarehouse = new Warehouse(STOCK_WOOD, STOCK_STEEL, STOCK_NAIL);
         myInventory = new Inventory(0, 0);
 
-        int order_index = 0;
+        /*int order_index = 0;
         Timer timer = new Timer();
 
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -70,13 +73,25 @@ public class Furniture_Manufacturing {
         }
 
         timer.cancel();
-        
+        */
         /**
          * Simulation for animation, adding resources when every 10 simulation time
          * i : simulation time
          * o : order index
          */
-/*        Animation animation = new Animation();
+        Animation animation  = new Animation();
+        animation.createUI();
+        
+        while(!isRun){
+            System.out.print("");
+        }
+        
+        myWarehouse.setWood(STOCK_WOOD);
+        myWarehouse.setSteel(STOCK_STEEL);
+        myWarehouse.setNail(STOCK_NAIL);
+        
+        animation = new Animation();
+        animation.play();
         animation.setResource(myWarehouse.getWood(), myWarehouse.getSteel(), myWarehouse.getNail());
         for(int i = 0, o = 0; o < myOrders.length; i++){
             // draw top 10 order
@@ -104,7 +119,7 @@ public class Furniture_Manufacturing {
                 animation.setResource(myWarehouse.getWood(), myWarehouse.getSteel(), myWarehouse.getNail());
             }
         }
-*/
+
         System.out.println("Simulation Ends");
         System.out.println("nChairs: " + myInventory.numChair);
         System.out.println("nTables: " + myInventory.numTable);
@@ -174,14 +189,14 @@ public class Furniture_Manufacturing {
             currWood = myWarehouse.takeWood(chairMaterials[0]);
             currSteel = myWarehouse.takeSteel(chairMaterials[1]);
             currNail = myWarehouse.takeNail(chairMaterials[2]);
-            processTime = 3;
+            processTime = itemDuration[type - 1];
             break;
 
         case 2:
             currWood = myWarehouse.takeWood(tableMaterials[0]);
             currSteel = myWarehouse.takeSteel(tableMaterials[1]);
             currNail = myWarehouse.takeNail(tableMaterials[2]);
-            processTime = 5;
+            processTime = itemDuration[type - 1];
             break;
         }
 
