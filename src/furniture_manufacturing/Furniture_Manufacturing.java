@@ -20,9 +20,9 @@ public class Furniture_Manufacturing {
      * Warehouse
      *
      */
-    public static final int STOCK_WOOD = 100;
-    public static final int STOCK_STEEL = 100;
-    public static final int STOCK_NAIL = 100;
+    public static int STOCK_WOOD = 100;
+    public static int STOCK_STEEL = 100;
+    public static int STOCK_NAIL = 100;
 
     public static Furniture[] myFurnitures;
     public static Order[] myOrders;
