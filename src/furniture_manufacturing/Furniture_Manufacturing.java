@@ -39,14 +39,14 @@ public class Furniture_Manufacturing {
 
     public static int simulation_runtime = 0;
     public static int[] intervalOrderTime = { 0, 10 };
-    public static int numOfOrder = 50;
+    public static int numOfOrder = 15;
 
     public static void main(String[] args) throws InterruptedException {
         myOrders = generateOrder(numOfOrder);
         myWarehouse = new Warehouse(STOCK_WOOD, STOCK_STEEL, STOCK_NAIL);
         myInventory = new Inventory(0, 0);
-
-        /*int order_index = 0;
+/*
+        int order_index = 0;
         Timer timer = new Timer();
 
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -73,9 +73,12 @@ public class Furniture_Manufacturing {
         }
 
         timer.cancel();
-        */
+        System.out.println("Simulation Ends");
+        System.out.println("nChairs: " + myInventory.numChair);
+        System.out.println("nTables: " + myInventory.numTable);
+*/        
         /**
-         * Simulation for animation, adding resources when every 10 simulation time
+         * Simulation for animation
          * i : simulation time
          * o : order index
          */
@@ -119,10 +122,6 @@ public class Furniture_Manufacturing {
                 animation.setResource(myWarehouse.getWood(), myWarehouse.getSteel(), myWarehouse.getNail());
             }
         }
-
-        System.out.println("Simulation Ends");
-        System.out.println("nChairs: " + myInventory.numChair);
-        System.out.println("nTables: " + myInventory.numTable);
         /**
          * Make a furniture type random 1, 0; 1 is chair 0 is table
          *
@@ -258,6 +257,7 @@ public class Furniture_Manufacturing {
     public static int rand(double from, double to) {
         return (int) (Math.random() * to + from);
     }
+    
 }
 
 /**
